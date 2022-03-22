@@ -1,5 +1,10 @@
 from openpyxl import *
+<<<<<<< HEAD
 from config import global_config
+=======
+
+# filename = '20220312_eth_uniswap_10.xlsx'
+>>>>>>> 04ccdd8665eab17bae54d5aa0f127c387123126c
 
 
 class Excel:
@@ -20,6 +25,7 @@ class Excel:
         return column_data
 
 
+<<<<<<< HEAD
 def getWallet():
     # 用户助记词路径，以xlsx格式保存，该路径由用户提供,在config.ini中配置
     file = global_config.get('path', 'wallet_path').strip()
@@ -29,6 +35,8 @@ def getWallet():
     return wallet
 
 
+=======
+>>>>>>> 04ccdd8665eab17bae54d5aa0f127c387123126c
 def getAddress(filename):
     if len(filename) == 0:
         print('未指定地址文件')
@@ -39,12 +47,15 @@ def getAddress(filename):
     return address_list
 
 
+<<<<<<< HEAD
 def getAddressV2():
     wallet = getWallet()
     address_list = wallet[0]
     return address_list
 
 
+=======
+>>>>>>> 04ccdd8665eab17bae54d5aa0f127c387123126c
 def getSeedPhrase(filename, address):
     input_address = address
     if len(filename) == 0:
@@ -61,6 +72,7 @@ def getSeedPhrase(filename, address):
             return mnemonic_list[num]
 
 
+<<<<<<< HEAD
 def getSeedPhraseV2(address):
     input_address = address
     wallet = getWallet()
@@ -72,6 +84,16 @@ def getSeedPhraseV2(address):
             num = i
             return mnemonic_list[num]
 
+=======
+def getSeedPhraseV2(filepath):
+    # 用户助记词路径，以xlsx格式保存，该路径由用户提供
+    # example:'/Users/luoye/Downloads/TestNetwork/20220317_eth_zkSync_muteSwitch_100.xlsx'
+    file = filepath
+    address_list = Excel(file).getColValues(1)
+    mnemonic_list = Excel(file).getColValues(3)
+    wallet = [address_list, mnemonic_list]
+    return wallet
+>>>>>>> 04ccdd8665eab17bae54d5aa0f127c387123126c
 
 
 

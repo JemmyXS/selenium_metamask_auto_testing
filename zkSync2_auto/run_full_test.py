@@ -1,5 +1,6 @@
 import time
 import wallet
+<<<<<<< HEAD
 from config import global_config
 import zkSync2_run_test as zkSync
 import muteSwitch_run_test as muteSwitch
@@ -15,6 +16,20 @@ for i in range(1, 101):
         zkSync.runTest(address)
         time.sleep(3)
         muteSwitch.runMuteSwitchTestnet(address)
+=======
+import zkSync2_run_test as zkSync
+import muteSwitch_run_test as muteSwitch
+
+filename = '20220317_eth_zkSync_muteSwitch_100.xlsx'
+address_list = wallet.getAddress(filename)
+result = open('/Users/luoye/Downloads/TestNetwork/zkSync2/full/result.txt', mode='a', encoding='utf-8')
+for i in range(1, 101):
+    address = address_list[i]
+    try:
+        zkSync.runTest(filename, address)
+        time.sleep(3)
+        muteSwitch.runMuteSwitchTestnet(filename, address)
+>>>>>>> 04ccdd8665eab17bae54d5aa0f127c387123126c
         time.sleep(3)
     except Exception as e:
         print(e)

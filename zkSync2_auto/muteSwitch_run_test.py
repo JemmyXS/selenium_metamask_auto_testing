@@ -3,7 +3,10 @@ import time
 import wallet
 import random
 from selenium.common.exceptions import NoSuchElementException
+<<<<<<< HEAD
 from config import global_config
+=======
+>>>>>>> 04ccdd8665eab17bae54d5aa0f127c387123126c
 
 
 # 动态时间，使用在受网速/区块确认速度影响的sleep中
@@ -11,14 +14,24 @@ dynamic_time = 10
 long_dynamic_time = 45
 
 
+<<<<<<< HEAD
 def runMuteSwitchTestnet(addr):
     # 指定chromedriver路径
     driver_path = global_config.get('path', 'driver_path').strip()
+=======
+def runMuteSwitchTestnet(filename, addr):
+    # 指定chromedriver路径
+    driver_path = '/Users/luoye/Downloads/tools/chromedriver'
+>>>>>>> 04ccdd8665eab17bae54d5aa0f127c387123126c
     driver = auto.launchSeleniumWebdriver(driver_path)
 
     def init():
         address = addr
+<<<<<<< HEAD
         seed_phrase = wallet.getSeedPhraseV2(address)
+=======
+        seed_phrase = wallet.getSeedPhrase(filename, address)
+>>>>>>> 04ccdd8665eab17bae54d5aa0f127c387123126c
         password = 'TestPassword'
         # 导入助记词
         auto.metamaskSetup(seed_phrase, password)
@@ -126,8 +139,13 @@ def runMuteSwitchTestnet(addr):
             except NoSuchElementException:
                 driver.find_element_by_xpath('//button[text()="Harvest"]').click()
                 time.sleep(3)
+<<<<<<< HEAD
                 screenshot_path = global_config.get('path', 'result_path').strip()
                 driver.get_screenshot_as_file(str(screenshot_path) + addr + '.png')
+=======
+                driver.get_screenshot_as_file(
+                    '/Users/luoye/Downloads/TestNetwork/zkSync2/muteSwitch' + addr + '.png')
+>>>>>>> 04ccdd8665eab17bae54d5aa0f127c387123126c
                 break
             else:
                 print("Approve")
@@ -150,8 +168,13 @@ def runMuteSwitchTestnet(addr):
                 time.sleep(3)
                 driver.find_element_by_xpath('//button[text()="Harvest"]').click()
                 time.sleep(3)
+<<<<<<< HEAD
                 screenshot_path = global_config.get('path', 'result_path').strip()
                 driver.get_screenshot_as_file(str(screenshot_path) + addr + '.png')
+=======
+                driver.get_screenshot_as_file(
+                    '/Users/luoye/Downloads/TestNetwork/zkSync2/muteSwitch/' + addr + '.png')
+>>>>>>> 04ccdd8665eab17bae54d5aa0f127c387123126c
                 break
 
     init()

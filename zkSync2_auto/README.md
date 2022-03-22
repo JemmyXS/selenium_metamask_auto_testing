@@ -35,6 +35,7 @@ pip install openpyxl
 推荐使用 [Pycharm](https://www.jetbrains.com/pycharm/)  
 
 ##开始使用
+<<<<<<< HEAD
 ### **1.配置chromedriver驱动、excel、运行结果路径**  
 参考`config.ini`中的注释完成相关配置  
 
@@ -141,13 +142,79 @@ pip install openpyxl
 >建议每个地址转入的测试币大于0.05ETH  
 
 ### **3.设定好循环次数，开始自动化测试**
+=======
+
+### **1.修改chromedriver驱动存放目录**  
+`zkSync2_run_test.py`中`driver_path`
+```python
+def runTest(filename, addr):
+    # 指定chromedriver路径
+    driver_path = '/Users/luoye/Downloads/tools/chromedriver'
+```  
+`muteSwitch_run_test.py`中`driver_path`
+```python
+def runMuteSwitchTestnet(filename, addr):
+    # 指定chromedriver路径
+    driver_path = '/Users/luoye/Downloads/tools/chromedriver'
+```
+
+### **2.修改`Wallet`目录下`__init__.py`中excel路径**
+```python
+def getAddress(filename):
+    if len(filename) == 0:
+        print('未指定地址文件')
+        return
+    # 用户地址路径，以xlsx格式保存
+    file = '/Users/luoye/Downloads/TestNetwork/' + filename
+    address_list = Excel(file).getColValues(1)
+    return address_list
+
+
+def getSeedPhrase(filename, address):
+    input_address = address
+    if len(filename) == 0:
+        print('未指定地址文件')
+        return
+    # 用户助记词路径，以xlsx格式保存，该路径由用户自行修改
+    file = '/Users/luoye/Downloads/TestNetwork/' + filename
+    address_list = Excel(file).getColValues(1)
+    mnemonic_list = Excel(file).getColValues(3)
+```
+### **3.修改运行完成时截图存放路径**  
+在`zkSync2_run_test.py`和`muteSwitch_run_test.py`查找  
+*get_screenshot_as_file* 并修改
+```python
+driver.get_screenshot_as_file('/Users/luoye/Downloads/TestNetwork/zkSync2/' + address + '.png')
+```
+```python
+driver.get_screenshot_as_file(
+                    '/Users/luoye/Downloads/TestNetwork/zkSync2/muteSwitch/' + addr + '.png')
+```
+### **4.修改`run_full_test.py`文件中Excel名及执行结果保存路径**  
+```python
+filename = '20220317_eth_zkSync_muteSwitch_100.xlsx'
+address_list = wallet.getAddress(filename)
+result = open('/Users/luoye/Downloads/TestNetwork/zkSync2/full/result.txt', mode='a', encoding='utf-8')
+```
+### **5.使用CoinTool提供的批量转账功能向钱包地址转账**  
+连接 [CoinTool](https://cointool.app/multiSender/eth) ，切换到Goerli测试网络，按页面提示完成批量转账
+>建议每个地址转入的测试币大于0.05ETH  
+
+### **6.设定好循环次数，开始自动化测试**
+>>>>>>> 04ccdd8665eab17bae54d5aa0f127c387123126c
 ```python
 for i in range(1, 101):
     address = address_list[i]
     try:
+<<<<<<< HEAD
         zkSync.runTest(address)
         time.sleep(3)
         muteSwitch.runMuteSwitchTestnet(address)
+=======
+        zkSync.runTest(filename, address)
+        time.sleep(3)
+        muteSwitch.runMuteSwitchTestnet(filename, address)
+>>>>>>> 04ccdd8665eab17bae54d5aa0f127c387123126c
         time.sleep(3)
 ```
 >注意：循环应从1开始
